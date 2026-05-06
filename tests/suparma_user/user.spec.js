@@ -3,13 +3,9 @@ import { loginUser } from '../helpers/loginUser';
 
 test.describe('User Authentication', () => {
   test('Should successfully login as User and show profile', async ({ page }) => {
-    // TODO: Ganti dengan kredensial user yang sebenarnya
-    const userEmail = 'user@example.com';
-    const userPassword = 'passwordUser123';
-
-    // Menggunakan helper loginUser
+    // Menggunakan helper loginUser yang mengambil kredensial dari .env
     // Validasi hilangnya tombol Masuk/Daftar dan munculnya profil sudah ada di dalam helper
-    await loginUser(page, userEmail, userPassword);
+    await loginUser(page);
     
     // Lanjutkan dengan flow user lainnya di sini
   });

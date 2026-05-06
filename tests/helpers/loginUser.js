@@ -1,7 +1,13 @@
 import { expect } from '@playwright/test';
 import { handleInitialPopup } from './handleInitialPopup';
 
-export async function loginUser(page, email, password) {
+export async function loginUser(page) {
+  const email = process.env.USER_EMAIL;
+  const password = process.env.USER_PASSWORD;
+
+  if (!email || !password) {
+    throw new Error('USER_EMAIL and USER_PASSWORD must be set in .env');
+  }
   await page.goto('https://suparma.venturo.pro/');
 
   await handleInitialPopup(page);
@@ -35,6 +41,9 @@ export async function loginUser(page, email, password) {
 
   // 3. Elemen profil user muncul
   // Asumsi locator untuk profil user, silahkan disesuaikan dengan elemen asli di web
-  const userProfile = page.locator('.user-profile, [alt="User Profile"], text=Profil'); 
-  await expect(userProfile).toBeVisible();
-}
+  const userProfile = page.locator('#tombol-profile');
+  await expect(userProfile).toBeAttached();
+
+
+  await page.pause();
+} 

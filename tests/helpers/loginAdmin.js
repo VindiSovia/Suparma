@@ -1,7 +1,13 @@
 import { expect } from '@playwright/test';
 import { handleInitialPopup } from './handleInitialPopup';
 
-export async function loginAdmin(page, email, password) {
+export async function loginAdmin(page) {
+  const email = process.env.ADMIN_EMAIL;
+  const password = process.env.ADMIN_PASSWORD;
+
+  if (!email || !password) {
+    throw new Error('ADMIN_EMAIL and ADMIN_PASSWORD must be set in .env');
+  }
   await page.goto('https://suparma.venturo.pro/');
   
   await handleInitialPopup(page);
