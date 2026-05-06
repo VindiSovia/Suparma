@@ -46,4 +46,5 @@ export async function loginUser(page) {
 
 
   await page.pause();
+  await page.pause();
 } 
