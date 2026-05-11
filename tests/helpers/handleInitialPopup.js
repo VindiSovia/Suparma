@@ -4,7 +4,7 @@ export async function handleInitialPopup(page) {
   
   // Tunggu sebentar untuk memastikan jika tombol update muncul
   try {
-    await updateButton.waitFor({ state: 'visible', timeout: 3000 });
+    await updateButton.waitFor({ state: 'visible', timeout: 1000 });
     if (await updateButton.isVisible()) {
       await updateButton.click();
     }
@@ -18,4 +18,16 @@ export async function handleInitialPopup(page) {
 
   const jakartaDepo = modal.locator('text=Jakarta');
   await jakartaDepo.click();
-}
+
+  // 3. Jika modal muncul lagi setelah klik Jakarta, klik close
+  try {
+    await modal.waitFor({ state: 'visible', timeout: 2000 });
+    if (await modal.isVisible()) {
+      const closeButton = modal.locator('button[aria-label="Close"], button.close, button:has-text("×"), button:has-text("Close")').first();
+      await closeButton.click();
+    }
+  } catch (error) {
+    // Modal tidak muncul lagi, lanjutkan
+  }
+
+} 

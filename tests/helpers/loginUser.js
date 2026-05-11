@@ -37,13 +37,13 @@ export async function loginUser(page) {
   const masukButton = page.locator('text=Masuk');
   const daftarButton = page.locator('text=Daftar');
   await expect(masukButton).toBeHidden();
+  await page.waitForTimeout(5000);
   await expect(daftarButton).toBeHidden();
+  await page.waitForTimeout(5000);
 
   // 3. Elemen profil user muncul
   // Asumsi locator untuk profil user, silahkan disesuaikan dengan elemen asli di web
   const userProfile = page.locator('#tombol-profile');
   await expect(userProfile).toBeAttached();
 
-
-  await page.pause();
 } 
